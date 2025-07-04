@@ -302,5 +302,23 @@ async def main():
     print("✅ Бот запущен")
     await dp.start_polling(bot)
 
+from fastapi import FastAPI
+import uvicorn
+
+app = FastAPI()
+
+@app.get("/")
+async def root():
+    return {"status": "ok"}
+
 if __name__ == "__main__":
+    import threading
+
+    # Запускаем FastAPI сервер в отдельном потоке
+    def run_server():
+        uvicorn.run(app, host="0.0.0.0", port=8000)
+
+    threading.Thread(target=run_server).start()
+
+    # Запуск Telegram-бота
     asyncio.run(main())
