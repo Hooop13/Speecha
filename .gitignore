@@ -13,7 +13,8 @@ api.env
 
 # Logs and records
 *.log
-records/
+/records/
+!/records/.gitkeep
 *.ogg
 *.wav
 
